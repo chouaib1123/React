@@ -10,8 +10,14 @@ function App() {
   const HandleChange = (event) => {
     setVal(event.target.value);
   };
-
   useEffect(() => {
+    const savedData = JSON.parse(window.localStorage.getItem("data")) || [];
+    setData(savedData);
+  }, []);
+  useEffect(() => {
+    if (data.length > 0) {
+      window.localStorage.setItem("data", JSON.stringify(data));
+    }
     setVal("");
   }, [data]);
 
